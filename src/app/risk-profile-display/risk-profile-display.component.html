@@ -1,0 +1,16 @@
+<div class="risk-profiles-container">
+    <h2>Conheça os Perfis de Risco</h2>
+    <p class="subtitle">Descubra qual perfil mais se alinha aos seus objetivos financeiros e tolerância a perdas.</p>
+
+    <div class="profile-cards-grid">
+        <div class="profile-card" *ngFor="let profile of profiles">
+            
+            <img [src]="profile.imageSrc" alt="imagem do perfil do investidor" class="profile-image">
+            
+            <div class="card-content">
+                <h3 class="profile-title">{{ profile.title }}</h3>
+                <p class="profile-description">{{ profile.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>

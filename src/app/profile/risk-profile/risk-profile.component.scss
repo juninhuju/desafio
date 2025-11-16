@@ -1,0 +1,124 @@
+/* risk-profile.component.scss */
+
+// --- VARIÁVEIS DE CORES ---
+$color-conservador: #00A69D;  // Verde Água (Segurança)
+$color-moderado: #FFB81C;     // Amarelo (Equilíbrio)
+$color-arrojado: #E30000;     // Vermelho (Risco/Oportunidade)
+$color-text: #2c3e50;
+$color-bg-light: #f5f8fa;
+
+// --- MIXIN PARA CORES DINÂMICAS ---
+@mixin profile-theme($color) {
+  border-left: 5px solid $color;
+  .profile-name {
+    color: $color;
+  }
+  .score-badge {
+    background-color: $color;
+  }
+}
+
+// --- CONTAINER PRINCIPAL (Card) ---
+.profile-card {
+  max-width: 450px;
+  margin: 30px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+  // O card interno, onde aplicamos a sombra e fundo
+  > div {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // Sombra profissional
+    padding: 20px;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); // Efeito de leve destaque ao passar o mouse
+    }
+  }
+
+  // --- TEMAS (Cores de Perfil) ---
+  &.conservador-theme {
+    @include profile-theme($color-conservador);
+  }
+  &.moderado-theme {
+    @include profile-theme($color-moderado);
+  }
+  &.arrojado-theme {
+    @include profile-theme($color-arrojado);
+  }
+}
+
+// --- ESTRUTURA DO CARD ---
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $color-bg-light;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+
+  .title {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: $color-text;
+    margin: 0;
+  }
+
+  .score-badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: white;
+  }
+}
+
+.card-content {
+  .profile-name {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .description {
+    font-size: 1em;
+    color: #555;
+    line-height: 1.5;
+  }
+}
+
+.card-footer {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px dashed $color-bg-light;
+
+  .disclaimer {
+    font-size: 0.75em;
+    color: #999;
+    margin: 0;
+  }
+}
+
+// --- ESTADO DE CARREGAMENTO (LOADING) ---
+.loading-state {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  
+  .spinner {
+    // Simples animação de carregamento (você pode substituir por um ícone)
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #007bff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

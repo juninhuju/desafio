@@ -1,11 +1,19 @@
+// src/app/models/simulation.model.ts
+
+/**
+ * Interface para os dados enviados na requisição POST /simular-investimento.
+ */
 export interface SimulationRequest {
-  valor: number;        // Valor inicial investido
-  prazoMeses: number;   // Prazo em meses
-  tipo: string;         // Tipo de investimento (CDB, LCI, Tesouro, etc.)
+    valor: number;
+    prazoMeses: number;
+    tipo: string; // Ex: "CDB", "LCI", "Tesouro Direto"
 }
 
+/**
+ * Interface para a resposta esperada da API /simular-investimento.
+ */
 export interface SimulationResponse {
-  valorFinal: number;   // Valor final após simulação
-  rentabilidade: number; // Rentabilidade anual
-  detalhes: string;     // Texto explicativo da simulação
+    valorFinal: number;
+    rentabilidade: number; // Valor decimal (ex: 0.12 para 12%)
+    detalhes: string;
 }

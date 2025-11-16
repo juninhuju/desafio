@@ -22,7 +22,7 @@ export class PortfolioComponent implements OnInit {
   scheme = {
     name: 'custom',
     selectable: true,
-    group: ScaleType.Ordinal, // ✅ usar enum correto
+    group: ScaleType.Ordinal,
     domain: [
       '#5AA454', // verde
       '#A10A28', // vermelho

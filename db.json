@@ -11,8 +11,7 @@
       "clientId": 123
     }
   },
-
-    "perfil-risco": {
+  "perfil-risco": {
     "123": {
       "clientId": 123,
       "perfil": "Moderado",
@@ -78,7 +77,30 @@
       "prazoMeses": 12,
       "tipo": "CDB",
       "id": 6
+    },
+    {
+      "valor": 10000,
+      "prazoMeses": 12,
+      "tipo": "CDB",
+      "id": 7
+    },
+    {
+      "valor": 10000,
+      "prazoMeses": 12,
+      "tipo": "CDB",
+      "id": 8
+    },
+    {
+      "valor": 10000,
+      "prazoMeses": 12,
+      "tipo": "CDB",
+      "id": 9
+    },
+    {
+      "valor": 10000,
+      "prazoMeses": 12,
+      "tipo": "CDB",
+      "id": 10
     }
   ]
-
 }

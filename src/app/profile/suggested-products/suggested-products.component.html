@@ -1,0 +1,91 @@
+<div class="suggestions-container">
+    <h2> Produto sugerido </h2>
+    
+    <div *ngIf="(suggestedProducts$ | async) as products; else loadingOrEmpty">
+        
+        <div class="products-grid">
+            <div 
+                *ngFor="let product of products" 
+                class="product-card-container" 
+                [attr.data-risk]="product.risco"
+            >
+                <div class="product-card">
+                    <header class="card-header">
+                        <span class="product-type">{{ product.tipo }}</span>
+                        <span class="risk-badge">{{ product.risco }}</span>
+                    </header>
+                    
+                    <h3 class="product-name">{{ product.nome }}</h3>
+                    
+                    <div class="product-details">
+                        <p>
+                            <span class="detail-label">Rentabilidade:</span>
+                            <span class="detail-value yield-value">{{ product.rentabilidade | percent: '1.2-2' }}</span>
+                        </p>
+                    </div>
+                    <div class="simulation-inputs">
+                        <div class="input-group">
+                            <label for="valor-input">Valor a Investir (R$)</label>
+                            <input 
+                                id="valor-input" 
+                                type="number" 
+                                [(ngModel)]="valorInput" 
+                                placeholder="Ex: 10000"
+                                min="100"
+                            >
+                        </div>
+                        <div class="input-group">
+                            <label for="prazo-input">Prazo (meses)</label>
+                            <input 
+                                id="prazo-input" 
+                                type="number" 
+                                [(ngModel)]="prazoInput" 
+                                placeholder="Ex: 12"
+                                min="1"
+                            >
+                        </div>
+                    </div>
+
+                    
+                    <button 
+                        class="simulate-button"
+                        (click)="simulateInvestment(product)"
+                        [disabled]="!valorInput || !prazoInput || valorInput <= 0 || prazoInput <= 0"
+                    >
+                        {{ product.simulatedResult ? 'Limpar Simulação' : 'Simular' }}
+                    </button>
+                </div>
+
+                <div *ngIf="product.simulatedResult" class="simulation-result-card">
+                    <h3>Resultado da Simulação para {{ product.nome }}</h3>
+                    
+                    <div class="result-details">
+                        <p>
+                            <span class="detail-label">Valor Aplicado:</span>
+                            <span class="detail-value">{{ product.simulatedResult.valorInicial | currency:'BRL':'symbol':'1.2-2' }}</span>
+                        </p>
+                        <p>
+                            <span class="detail-label">Prazo:</span>
+                            <span class="detail-value">{{ product.simulatedResult.prazoMeses }} meses</span>
+                        </p>
+                        <hr>
+                        <p>
+                            <span class="detail-label">Taxa Anual Bruta:</span>
+                            <span class="detail-value yield-value">{{ product.simulatedResult.rentabilidade | percent: '1.2-2' }}</span>
+                        </p>
+                        <p>
+                            <span class="detail-label">Valor Bruto Final:</span>
+                            <span class="detail-value final-value">{{ product.simulatedResult.valorFinal | currency:'BRL':'symbol':'1.2-2' }}</span>
+                        </p>
+                    </div>
+                    <div class="details-description">
+                        {{ product.simulatedResult.detalhes }}
+                    </div>
+                </div>
+
+            </div> </div>
+    </div>
+
+    <ng-template #loadingOrEmpty>
+        </ng-template>
+</div>

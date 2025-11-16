@@ -1,0 +1,76 @@
+/* src/app/shared/risk-profile-display/risk-profile-display.component.scss */
+
+$primary-color: #004c98;
+$text-dark: #2c3e50;
+$bg-light: #f9f9f9;
+
+.risk-profiles-container {
+    padding: 30px 20px;
+    background-color: $bg-light;
+    text-align: center;
+}
+
+h2 {
+    color: $primary-color;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 1.1em;
+}
+
+.profile-cards-grid {
+    display: grid;
+    // Usa CSS Grid para garantir 3 colunas em telas grandes e flexibilidade
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    text-align: left;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+}
+
+.profile-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover; /* Garante que a imagem preencha o espaço */
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.profile-title {
+    font-size: 1.5em;
+    color: $text-dark;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: 2px solid $primary-color;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.profile-description {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Responsividade: Transforma em coluna única em telas menores */
+@media (max-width: 768px) {
+    .profile-cards-grid {
+        grid-template-columns: 1fr; /* Força uma coluna */
+    }
+}
