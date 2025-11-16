@@ -1,0 +1,19 @@
+.caixa-header {
+    background-color: #004c98; /* Azul escuro da CAIXA */
+    color: white;
+    padding: 16px 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box; /* Garante que padding não estoure o layout */
+    
+    .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        
+        h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+    }
+}

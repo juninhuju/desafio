@@ -1,0 +1,60 @@
+<mat-card class="simulator-card">
+    <mat-card-title>Simulador de Investimentos</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="simulationForm" (ngSubmit)="onSubmit()" class="simulation-form">
+            
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Valor a Investir (R$)</mat-label>
+                <input matInput formControlName="valor" type="number" min="100" required aria-label="Valor inicial para a simulação">
+                <mat-error *ngIf="simulationForm.get('valor')?.hasError('required')">O valor é obrigatório.</mat-error>
+                <mat-error *ngIf="simulationForm.get('valor')?.hasError('min')">O valor mínimo é R$ 100.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Prazo (Meses)</mat-label>
+                <input matInput formControlName="prazoMeses" type="number" min="1" required aria-label="Prazo em meses do investimento">
+                <mat-error *ngIf="simulationForm.get('prazoMeses')?.hasError('required')">O prazo é obrigatório.</mat-error>
+                <mat-error *ngIf="simulationForm.get('prazoMeses')?.hasError('min')">O prazo mínimo é 1 mês.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Tipo de Produto</mat-label>
+                <input matInput formControlName="tipo" required aria-label="Tipo de investimento a ser simulado">
+                <mat-error *ngIf="simulationForm.get('tipo')?.hasError('required')">O tipo é obrigatório.</mat-error>
+            </mat-form-field>
+            
+            <button mat-raised-button color="primary" type="submit" [disabled]="simulationForm.invalid || isLoading">
+                {{ isLoading ? 'Simulando...' : 'Simular Investimento' }}
+            </button>
+        </form>
+
+        <mat-divider></mat-divider>
+        
+        <div class="simulation-results" *ngIf="simulationResult$ | async as result">
+            <h3>Resultado da Simulação</h3>
+            <p><strong>Valor Final Estimado:</strong> {{ result.valorFinal | currency:'BRL':'symbol':'1.2-2' }}</p>
+            <p><strong>Rentabilidade Estimada:</strong> {{ result.rentabilidade | percent:'1.2-2' }}</p>
+            <p class="details">{{ result.detalhes }}</p>
+            
+            <div class="chart-area" *ngIf="lineChartData.length > 0">
+                <h4>Retorno Mês a Mês (Visualização)</h4>
+                
+                <ngx-charts-line-chart
+                    [view]="[600, 300]"
+                    [scheme]="'vivid'"
+                    [results]="lineChartData"
+                    [xAxis]="true"
+                    [yAxis]="true"
+                    [showYAxisLabel]="true"
+                    [showXAxisLabel]="true"
+                    xAxisLabel="Prazo (Meses)"
+                    yAxisLabel="Valor Acumulado (R$)">
+                </ngx-charts-line-chart>
+            </div>
+        </div>
+
+        <div *ngIf="error" class="error-message" role="alert" aria-live="assertive">
+            {{ error }}
+        </div>
+    </mat-card-content>
+</mat-card>

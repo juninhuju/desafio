@@ -1,0 +1,36 @@
+.caixa-footer {
+    background-color: #004c98; /* Azul escuro da CAIXA */
+    color: white;
+    padding: 20px 24px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-top: auto; /* Garante que o footer fique no final da página */
+
+    .footer-grid {
+        display: flex;
+        justify-content: center;
+        gap: 80px;
+        margin-bottom: 10px;
+    }
+
+    .contact-info {
+        p {
+            margin: 0;
+            line-height: 1.4;
+        }
+        strong {
+            font-size: 1rem;
+            display: block;
+        }
+    }
+
+    .legal-note {
+        p {
+            margin: 0;
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+    }
+}

@@ -1,0 +1,84 @@
+{
+  "usuarios": [
+    {
+      "email": "cliente@exemplo.com",
+      "senha": "123456"
+    }
+  ],
+  "autenticacao": {
+    "login": {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9…",
+      "clientId": 123
+    }
+  },
+
+    "perfil-risco": {
+    "123": {
+      "clientId": 123,
+      "perfil": "Moderado",
+      "descricao": "Perfil equilibrado entre segurança e rentabilidade.",
+      "pontuacao": 65
+    }
+  },
+  "investimentos": {
+    "123": [
+      {
+        "id": 1,
+        "tipo": "CDB",
+        "valor": 5000,
+        "rentabilidade": 0.12,
+        "data": "2025-01-15"
+      }
+    ]
+  },
+  "produtos-recomendados": {
+    "moderado": [
+      {
+        "id": 101,
+        "nome": "CDB Caixa 2026",
+        "tipo": "CDB",
+        "rentabilidade": 0.13,
+        "risco": "Baixo"
+      }
+    ]
+  },
+  "simular-investimento": [
+    {
+      "id": 1,
+      "valorFinal": 11200,
+      "rentabilidade": 0.12,
+      "detalhes": "Simulação baseada em CDB com taxa de 12% ao ano."
+    },
+    {
+      "valor": 1000,
+      "prazoMeses": 12,
+      "tipo": "Fundo Imobiliário",
+      "id": 2
+    },
+    {
+      "valor": 100,
+      "prazoMeses": 12,
+      "tipo": "Fundo Imobiliário",
+      "id": 3
+    },
+    {
+      "valor": 1000,
+      "prazoMeses": 12,
+      "tipo": "CDB",
+      "id": 4
+    },
+    {
+      "valor": 1000,
+      "prazoMeses": 12,
+      "tipo": "CDB",
+      "id": 5
+    },
+    {
+      "valor": 1000,
+      "prazoMeses": 12,
+      "tipo": "CDB",
+      "id": 6
+    }
+  ]
+
+}

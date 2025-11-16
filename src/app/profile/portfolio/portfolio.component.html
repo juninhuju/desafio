@@ -1,0 +1,41 @@
+<div class="portfolio-container">
+  <h2>Minha Carteira de Investimentos</h2>
+
+  <div *ngIf="investimentos.length > 0; else semInvestimentos" class="grafico-wrapper">
+
+    <ngx-charts-advanced-pie-chart
+      [view]="view"
+      [scheme]="scheme"
+      [results]="chartData"
+      [gradient]="gradient"
+      [tooltipDisabled]="tooltipDisabled"
+      (select)="onSelect($event)">
+    </ngx-charts-advanced-pie-chart>
+  </div>
+
+  <ng-template #semInvestimentos>
+    <div class="empty-state">
+      <p>Você não possui investimentos registrados no momento.</p>
+    </div>
+  </ng-template>
+
+  <h3 class="title-table">Detalhes dos Investimentos</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Tipo</th>
+        <th>Valor</th>
+        <th>Rentabilidade</th>
+        <th>Data</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inv of investimentos">
+        <td>{{ inv.tipo }}</td>
+        <td>{{ inv.valor | currency:'BRL' }}</td>
+        <td>{{ inv.rentabilidade | percent }}</td>
+        <td>{{ inv.data }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,140 @@
+/* ----------------------------------------------------------- */
+/* CONTAINER E TÍTULO */
+/* ----------------------------------------------------------- */
+.investment-teaser-container {
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    color: #004c98;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 25px;
+}
+
+/* ... (Estilos das abas de filtro permanecem os mesmos) ... */
+
+/* ----------------------------------------------------------- */
+/* GRID DE CARDS (150px LARGURA, CENTRALIZADO) */
+/* ----------------------------------------------------------- */
+.products-grid {
+    display: grid;
+    // Define colunas adaptáveis, mas com tamanho base de 150px
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    
+    // Aplica o GAP de 20px entre os cards
+    gap: 20px;
+    
+    // CENTRALIZAÇÃO: Faz o grid ocupar apenas o espaço do conteúdo e o centraliza
+    width: fit-content; 
+    margin: 0 auto;
+    
+    .product-card {
+        max-width: 150px; 
+        padding: 0 !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        border-radius: 10px;
+        
+        .card-content-body {
+            background-color: white;
+            padding: 10px; 
+        }
+    }
+}
+
+/* ----------------------------------------------------------- */
+/* CORES DINÂMICAS DOS HEADERS */
+/* ----------------------------------------------------------- */
+.conservative .card-header-bg { 
+    background-color: #38761d; 
+}
+.moderate .card-header-bg { 
+    background-color: #004c98; 
+}
+.aggressive .card-header-bg { 
+    background-color: #a61c00; 
+}
+
+/* ----------------------------------------------------------- */
+/* INPUTS E FORMULÁRIO */
+/* ----------------------------------------------------------- */
+.input-fields-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 0.7rem;
+        width: 50%;
+        
+        label {
+            font-size: 0.7rem;
+            color: #666;
+            margin-bottom: 3px;
+        }
+    }
+    
+    .value-input, .term-input {
+        width: 100%;
+        padding: 4px 6px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 0.8rem;
+    }
+}
+
+/* ----------------------------------------------------------- */
+/* VALOR FINAL E BOTÃO SIMULAR */
+/* ----------------------------------------------------------- */
+.action-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    
+    .final-value {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #004c98;
+        white-space: nowrap; 
+    }
+    
+    .simulate-button {
+        background-color: #004c98;
+        color: white;
+        padding: 4px 8px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        border-radius: 4px;
+        line-height: normal; 
+        min-width: 0;
+    }
+}
+
+/* ----------------------------------------------------------- */
+/* GRÁFICO */
+/* ----------------------------------------------------------- */
+.chart-container {
+    height: 60px;
+    margin-top: 10px;
+}
+
+.chart-placeholder {
+    height: 60px; 
+    border: 1px solid #ccc; 
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: #aaa;
+}

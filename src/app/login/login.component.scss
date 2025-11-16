@@ -1,0 +1,115 @@
+/* ----------------------------------------------------------- */
+/* 1. CONTAINER E LAYOUT GERAL */
+/* ----------------------------------------------------------- */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  font-family: Arial, sans-serif;
+}
+
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ----------------------------------------------------------- */
+/* 2. BARRA DE LOGIN (Baseada em image_5a14c3.png) */
+/* ----------------------------------------------------------- */
+.login-bar {
+  background-color: #004c98; /* Azul escuro da CAIXA */
+  color: white;
+  padding: 20px 0;
+  margin: 40px auto 30px auto;
+  max-width: 700px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .login-form-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 0 20px;
+    flex-wrap: wrap; /* ✅ evita sobreposição em telas menores */
+
+    .form-field-label {
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    input {
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      width: 180px; /* Largura ajustada para caber na barra */
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: transparent;
+      color: white;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+/* ----------------------------------------------------------- */
+/* 3. MENSAGEM DE ERRO */
+/* ----------------------------------------------------------- */
+.error-message {
+  text-align: center;
+  color: #ffcccc;
+  font-size: 0.9rem;
+  margin-top: 15px;
+}
+
+/* ----------------------------------------------------------- */
+/* 4. RESPONSIVIDADE */
+/* ----------------------------------------------------------- */
+@media (max-width: 900px) {
+  .profiles-grid,
+  .investments-grid {
+    display: block;
+    margin: 0 10px 50px 10px;
+  }
+
+  .profile-item,
+  .investment-card {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .login-bar {
+    max-width: 95%;
+  }
+
+  .login-form-content {
+    flex-direction: column; /* ✅ inputs e botão em coluna no mobile */
+    gap: 10px;
+
+    input {
+      width: 100%;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+}

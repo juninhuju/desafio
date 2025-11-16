@@ -1,0 +1,49 @@
+<div class="login-container">
+  <div class="main-content">
+    <div class="content-wrapper">
+      <div class="login-bar">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form-content">
+
+          <!-- Campo de e-mail -->
+          <mat-form-field appearance="fill">
+            <mat-label>E-mail</mat-label>
+            <input
+              matInput
+              id="login-email-input"
+              formControlName="email"
+              type="email"
+              placeholder="Digite seu e-mail"
+              autocomplete="username"
+              required
+            >
+          </mat-form-field>
+
+          <!-- Campo de senha -->
+          <mat-form-field appearance="fill">
+            <mat-label>Senha</mat-label>
+            <input
+              matInput
+              id="login-senha-input"
+              formControlName="senha"
+              type="password"
+              placeholder="Digite sua senha"
+              autocomplete="current-password"
+              required
+            >
+          </mat-form-field>
+
+          <!-- Botão -->
+          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
+            Entrar
+          </button>
+        </form>
+
+        <!-- Mensagem de erro -->
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

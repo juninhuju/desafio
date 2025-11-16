@@ -1,0 +1,11 @@
+.app-shell {
+  display: flex; 
+  flex-direction: column; 
+  min-height: 100vh; /* O 'vh' só funciona se o body e html tiverem 100% */
+}
+
+.content-area {
+  flex-grow: 1; /* Isto aqui empurra o footer */
+}
+
+/* Restante do CSS do footer... */
