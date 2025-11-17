@@ -1,20 +1,12 @@
 // src/app/profile/suggested-products/suggested-products.component.scss
 
-// Variáveis de Cores (Definições Inlined)
-// $risk-low: #00A69D;     
-// $risk-medium: #FFB81C;  
-// $risk-high: #E30000;    
-// $primary-color: #004c98;
-// $text-color: #2c3e50;
-// $bg-light: #f5f8fa;
-
 .suggestions-container {
     padding: 20px;
     font-family: Arial, sans-serif;
 
     h2 {
-        color: #004c98; /* $primary-color */
-        border-bottom: 2px solid #004c98; /* $primary-color */
+        color: #004c98; /* primary-color */
+        border-bottom: 2px solid #004c98; /* primary-color */
         padding-bottom: 10px;
         margin-bottom: 15px;
     }
@@ -33,13 +25,17 @@
     gap: 25px;
 }
 
+h2 {
+    text-align: center;
+}
+
 .product-card-container {
     // Contêiner wrapper necessário para que o resultado apareça abaixo do card na grid
     display: flex;
     flex-direction: column;
 }
 
-.product-card {
+    .product-card {
     background: white;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
@@ -47,15 +43,17 @@
     transition: transform 0.3s ease-in-out;
     border: 1px solid #eee;
     flex-grow: 1; /* Garante que o card ocupe o espaço na grid */
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
     
-    // Reset da transformação para evitar que a simulação mova quando o card for hover
     .product-card-container:hover & {
         transform: translateY(-5px);
         box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     }
 }
 
-// ----------------- ESTILOS DOS INPUTS DE SIMULAÇÃO (CORREÇÃO) -----------------
+// ----------------- ESTILOS DOS INPUTS DE SIMULAÇÃO -----------------
 .simulation-inputs {
     margin-top: 15px;
     margin-bottom: 20px;
@@ -101,22 +99,22 @@
 
 // ----------------- TEMAS DE RISCO -----------------
 .product-card-container[data-risk="Baixo"] .product-card {
-    border-left: 5px solid #00A69D; /* $risk-low */
+    border-left: 5px solid #00A69D;
 }
-.product-card-container[data-risk="Baixo"] .risk-badge { background-color: #00A69D; } /* $risk-low */
-.product-card-container[data-risk="Baixo"] .yield-value { color: #00A69D; } /* $risk-low */
+.product-card-container[data-risk="Baixo"] .risk-badge { background-color: #00A69D; }
+.product-card-container[data-risk="Baixo"] .yield-value { color: #00A69D; }
 
 .product-card-container[data-risk="Médio"] .product-card {
-    border-left: 5px solid #FFB81C; /* $risk-medium */
+    border-left: 5px solid #FFB81C;
 }
-.product-card-container[data-risk="Médio"] .risk-badge { background-color: #FFB81C; } /* $risk-medium */
-.product-card-container[data-risk="Médio"] .yield-value { color: #FFB81C; } /* $risk-medium */
+.product-card-container[data-risk="Médio"] .risk-badge { background-color: #FFB81C; }
+.product-card-container[data-risk="Médio"] .yield-value { color: #FFB81C; }
 
 .product-card-container[data-risk="Alto"] .product-card {
-    border-left: 5px solid #E30000; /* $risk-high */
+    border-left: 5px solid #E30000;
 }
-.product-card-container[data-risk="Alto"] .risk-badge { background-color: #E30000; } /* $risk-high */
-.product-card-container[data-risk="Alto"] .yield-value { color: #E30000; } /* $risk-high */
+.product-card-container[data-risk="Alto"] .risk-badge { background-color: #E30000; }
+.product-card-container[data-risk="Alto"] .yield-value { color: #E30000; }
 // --------------------------------------------------
 
 .card-header {
@@ -129,7 +127,7 @@
 .product-type {
     font-size: 0.9em;
     font-weight: 600;
-    color: #004c98; /* $primary-color */
+    color: #004c98; /* primary-color */
 }
 
 .risk-badge {
@@ -142,7 +140,7 @@
 
 .product-name {
     font-size: 1.3em;
-    color: #2c3e50; /* $text-color */
+    color: #2c3e50; /* text-color */
     margin: 0 0 10px;
     font-weight: 600;
 }
@@ -163,28 +161,12 @@
     }
 }
 
-.invest-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #004c98; /* $primary-color */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.2s;
-
-    &:hover {
-        background-color: #00376d; /* darken($primary-color, 10%) */
-    }
-}
-
-// NOVO ESTILO PARA O BOTÃO DE SIMULAÇÃO
+// Botão de Simulação
 .simulate-button {
     width: 100%;
     padding: 10px;
-    margin-top: 15px; /* Espaçamento do botão em relação aos detalhes */
-    background-color: #00A69D; /* $risk-low */
+    margin-top: 15px;
+    background-color: #00A69D; /* Cor de Simulação (verde/teal) */
     color: white;
     border: none;
     border-radius: 5px;
@@ -193,23 +175,51 @@
     font-weight: 600;
     transition: background-color 0.2s;
     
-    &:hover {
-        background-color: #00877e; /* darken($risk-low, 10%) */
+    &:hover:not(:disabled) {
+        background-color: #00877e;
+    }
+    &:disabled {
+        background-color: #aaa;
+        cursor: not-allowed;
     }
 }
 // FIM DO NOVO ESTILO
 
-// ----------------- ESTILO PARA O CARD DE RESULTADO -----------------
-.simulation-result-card {
-    background: #fcfcfc; /* Fundo levemente diferente */
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); 
+
+// ----------------- ESTILOS SIMULAÇÃO + GRÁFICO (NOVO) -----------------
+
+.simulation-chart-wrapper {
+    margin-top: 15px;
     padding: 20px;
-    margin-top: 15px; /* Espaçamento entre o card principal e o resultado */
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     border: 1px solid #ddd;
-    
+
+    /* Layout Lado a Lado (Flexbox) */
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 1000px) {
+        // Quebra para coluna em telas menores, se o card não for largo o suficiente
+        flex-direction: column;
+    }
+}
+
+.simulation-result-card {
+    /* Ajusta o estilo do card de resultado dentro do novo wrapper */
+    flex: 1;
+    min-width: 250px;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    border: none;
+    margin-top: 0;
+
     h3 {
-        color: #004c98; /* $primary-color */
+        color: #004c98;
         margin-top: 0;
         margin-bottom: 15px;
         font-size: 1.2em;
@@ -229,7 +239,7 @@
         }
         .final-value {
             font-weight: 800;
-            color: #00A69D; /* $risk-low */
+            color: #00A69D; /* Cor de destaque (Baixo risco) */
             font-size: 1.1em;
         }
     }
@@ -243,19 +253,44 @@
     .details-description {
         margin-top: 15px;
         padding: 10px;
-        background-color: #f5f8fa; /* $bg-light */
+        background-color: #f5f8fa; /* bg-light */
         border-radius: 5px;
         font-size: 0.9em;
         color: #666;
     }
 }
-// -------------------------------------------------------------------
+
+
+.simulation-chart-panel {
+    flex: 1.5; /* Dá mais espaço para o gráfico */
+    min-width: 350px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+    .chart-title {
+        color: #004c98;
+        font-size: 1.2em;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    // Configuração de altura para ngx-charts
+    ngx-charts-area-chart {
+        height: auto; 
+        width: auto;
+    }
+}
+
+// ----------------- FIM DOS ESTILOS SIMULAÇÃO + GRÁFICO -----------------
+
 
 .empty-state {
     text-align: center;
     padding: 30px;
     border: 1px dashed #ddd;
     border-radius: 8px;
-    background-color: #f5f8fa; /* $bg-light */
+    background-color: #f5f8fa; /* bg-light */
     color: #666;
 }

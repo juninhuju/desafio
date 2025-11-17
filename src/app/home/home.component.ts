@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from '../login/login.component';
-import { RiskProfileDisplayComponent } from "../risk-profile-display/risk-profile-display.component";
+import { RiskProfileDisplayComponent } from "../profile/risk-profile-display/risk-profile-display.component";
 
 @Component({
   selector: 'app-home',

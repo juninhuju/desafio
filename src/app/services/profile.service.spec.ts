@@ -20,7 +20,7 @@ describe('ProfileService', () => {
     { id: 2, tipo: 'Fundo', valor: 3000, rentabilidade: 0.08, data: '2025-03-10' }
   ];
   const mockProducts: RecommendedProduct[] = [
-    { id: 101, nome: 'CDB Caixa 2026', tipo: 'CDB', rentabilidade: 0.13, risco: 'Baixo' },
+    { id: 101, nome: 'CDB Caixa 2026', tipo: 'CDB', rentabilidade: 0.12, risco: 'Baixo' },
     { id: 102, nome: 'Fundo Agressivo XPTO', tipo: 'Fundo', rentabilidade: 0.18, risco: 'Alto' }
   ];
 

@@ -1,0 +1,75 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*",
+    "dist/**/*"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    // 1. Adicionar o plugin 'unused-imports' AQUI:
+    "unused-imports" 
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@angular-eslint/recommended",
+    // Esta extensão é importante para componentes que usam template inline
+    "plugin:@angular-eslint/template/process-inline-templates"
+  ],
+  "rules": {
+    // Regras gerais para o projeto Angular
+    "@angular-eslint/directive-selector": [
+      "error",
+      {
+        "type": "attribute",
+        "prefix": "app",
+        "style": "camelCase"
+      }
+    ],
+    "@angular-eslint/component-selector": [
+      "error",
+      {
+        "type": "element",
+        "prefix": "app",
+        "style": "kebab-case"
+      }
+    ],
+    
+    // --- Configuração para Identificar Código Não Utilizado ---
+    
+    // 2. DESATIVA as regras nativas de variáveis não utilizadas:
+    "no-unused-vars": "off", 
+    "@typescript-eslint/no-unused-vars": "off",
+
+    // 3. ATIVA a regra de importações não utilizadas (marca como ERRO):
+    "unused-imports/no-unused-imports": "error",
+    
+    // 4. ATIVA a regra de variáveis não utilizadas (Via Plugin):
+    "unused-imports/no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        // Variáveis que começam com '_' serão ignoradas
+        "varsIgnorePattern": "^_",
+        "args": "none",
+        // Argumentos de função que começam com '_' serão ignorados
+        "argsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ]
+  },
+  "overrides": [
+    {
+      // Regras que se aplicam apenas aos templates HTML
+      "files": ["*.html"],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}

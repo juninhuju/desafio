@@ -9,8 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from "../header/header.component";
-import { FooterComponent } from "../footer/footer.component";
 
 @Component({
   selector: 'app-login',
@@ -21,9 +19,7 @@ import { FooterComponent } from "../footer/footer.component";
     MatCardModule,
     MatInputModule,
     MatButtonModule,
-    MatFormFieldModule,
-    HeaderComponent,
-    FooterComponent
+    MatFormFieldModule
 ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']

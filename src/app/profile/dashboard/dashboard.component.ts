@@ -15,7 +15,7 @@ import { PortfolioComponent } from "../portfolio/portfolio.component";
 // Importações dos modelos
 import { RiskProfile } from '../../models/profile.model'; 
 import { InvestmentHistoryItem } from '../../models/investment.model';
-import { SuggestedProductsComponent } from "../suggested-products/suggested-products.component"; 
+import { SuggestedProductsComponent } from "../suggested-products/suggested-products.component";
 
 
 @Component({

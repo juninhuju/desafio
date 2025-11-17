@@ -17,7 +17,7 @@ import { RecommendedProduct } from '../models/product.model';
 
 // 1. Lista Unificada de TODOS os produtos disponíveis
 const ALL_PRODUCTS: RecommendedProduct[] = [
-  { id: 101, nome: "CDB Caixa 2026", tipo: "CDB", rentabilidade: 0.13, risco: "Baixo" },
+  { id: 101, nome: "CDB Caixa 2026", tipo: "CDB", rentabilidade: 0.12, risco: "Baixo" },
   { id: 102, nome: "Fundo Agressivo XPTO", tipo: "Fundo", rentabilidade: 0.18, risco: "Alto" },
 ];
 

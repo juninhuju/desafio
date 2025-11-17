@@ -1,47 +1,17 @@
-/* Estilos Padrão (Desktop First - Telas Largas) */
-
 .container {
-    display: flex; /* Mantém a disposição lado a lado por padrão */
-    justify-content: center;
-    width: 100%;
-    gap: 20px; /* Adicione um pequeno espaço entre os itens */
+    margin: 0;
+    padding: 0;
 }
+.investor-dashboard {
+    display: flex;
+    justify-content: space-around;
 
-.portfolio {
-    flex-shrink: 0;
-    align-items: center;
-    margin-top: auto;
-    margin-bottom: auto;
 }
 
 .profile {
-    width: auto;
     display: flex;
     justify-content: center;
-}
-
-.suggested {
-    width: auto;
-    display: flex;
-    justify-content: center;
+    align-items: center;
 }
 
 
-/* Media Query: Aplica estilos em telas menores que 768px (Mobile) */
-@media (max-width: 768px) {
-
-    .container {
-        /* Muda a direção do layout de linha para coluna */
-        flex-direction: column; 
-        gap: 0; 
-    }
-
-    .portfolio,
-    .profile {
-        /* Força ambos os itens a ocuparem 100% da largura do contêiner */
-        width: 100%; 
-        
-        /* Adiciona um pequeno espaçamento entre eles na vertical (opcional) */
-        margin-bottom: 20px; 
-    }
-} 

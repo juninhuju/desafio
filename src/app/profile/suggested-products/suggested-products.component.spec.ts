@@ -15,7 +15,7 @@ const mockAuthService = {
     getClientId: jest.fn(() => 'client-123'),
     getRiskProfile: jest.fn(() => of({ perfil: 'Agressivo' })),
     getRecommendedProducts: jest.fn(() => of([
-        { nome: 'CDB Teste', tipo: 'CDB', risco: 'Baixo', rentabilidade: 0.13 } as RecommendedProduct
+        { nome: 'CDB Teste', tipo: 'CDB', risco: 'Baixo', rentabilidade: 0.12 } as RecommendedProduct
     ])),
 };
 
@@ -51,7 +51,7 @@ describe('SuggestedProductsComponent', () => {
     
     it('should call simulateInvestment on service and display result on success', () => {
         // Arrange
-        const mockProduct = { nome: 'CDB Mock', tipo: 'CDB', risco: 'Baixo', rentabilidade: 0.13 } as RecommendedProduct;
+        const mockProduct = { nome: 'CDB Mock', tipo: 'CDB', risco: 'Baixo', rentabilidade: 0.12 } as RecommendedProduct;
         const mockResult = { valorFinal: 11200, rentabilidade: 0.12, detalhes: 'Simulação OK.' };
         
         // Simula o retorno de sucesso do service
@@ -77,7 +77,7 @@ describe('SuggestedProductsComponent', () => {
 
     it('should show an error alert when simulateInvestment fails', () => {
         // Arrange
-        const mockProduct = { nome: 'CDB Mock', tipo: 'CDB', risco: 'Baixo', rentabilidade: 0.13 } as RecommendedProduct;
+        const mockProduct = { nome: 'CDB Mock', tipo: 'CDB', risco: 'Baixo', rentabilidade: 0.12 } as RecommendedProduct;
         
         // Simula o retorno de erro do service
         (investmentService.simulateInvestment as jest.Mock).mockReturnValue(

@@ -1,13 +1,16 @@
-<button (click)="logout()">Sair</button>
+<div class="button">
+    <button (click)="logout()">Sair</button>
+</div>
 
 <main class="container">
-    <div>
-    <app-portfolio class="portfolio"></app-portfolio>
+    <div class="investor-dashboard">
+        <app-portfolio class="portfolio"></app-portfolio>
+        <app-risk-profile class="profile"></app-risk-profile>
     </div>
-    <div>
-    <app-risk-profile class="profile"></app-risk-profile>
-    <app-suggested-products class="suggested"></app-suggested-products>
+    <div class="simulation">
+        <app-suggested-products class="suggested"></app-suggested-products>
     </div>
 </main>
+
 
 

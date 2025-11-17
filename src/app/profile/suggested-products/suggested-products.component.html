@@ -56,34 +56,55 @@
                     </button>
                 </div>
 
-                <div *ngIf="product.simulatedResult" class="simulation-result-card">
-                    <h3>Resultado da Simulação para {{ product.nome }}</h3>
+                <div *ngIf="product.simulatedResult" class="simulation-chart-wrapper">
                     
-                    <div class="result-details">
-                        <p>
-                            <span class="detail-label">Valor Aplicado:</span>
-                            <span class="detail-value">{{ product.simulatedResult.valorInicial | currency:'BRL':'symbol':'1.2-2' }}</span>
-                        </p>
-                        <p>
-                            <span class="detail-label">Prazo:</span>
-                            <span class="detail-value">{{ product.simulatedResult.prazoMeses }} meses</span>
-                        </p>
-                        <hr>
-                        <p>
-                            <span class="detail-label">Taxa Anual Bruta:</span>
-                            <span class="detail-value yield-value">{{ product.simulatedResult.rentabilidade | percent: '1.2-2' }}</span>
-                        </p>
-                        <p>
-                            <span class="detail-label">Valor Bruto Final:</span>
-                            <span class="detail-value final-value">{{ product.simulatedResult.valorFinal | currency:'BRL':'symbol':'1.2-2' }}</span>
-                        </p>
+                    <div class="simulation-result-card">
+                        <h3>Resultado da Simulação para {{ product.nome }}</h3>
+                        
+                        <div class="result-details">
+                            <p>
+                                <span class="detail-label">Valor Aplicado:</span>
+                                <span class="detail-value">{{ product.simulatedResult.valorInicial | currency:'BRL':'symbol':'1.2-2' }}</span>
+                            </p>
+                            <p>
+                                <span class="detail-label">Prazo:</span>
+                                <span class="detail-value">{{ product.simulatedResult.prazoMeses }} meses</span>
+                            </p>
+                            <hr>
+                            <p>
+                                <span class="detail-label">Taxa Anual Bruta:</span>
+                                <span class="detail-value yield-value">{{ product.simulatedResult.rentabilidade | percent: '1.2-2' }}</span>
+                            </p>
+                            <p class="final-result">
+                                <span class="detail-label">Valor Bruto Final:</span>
+                                <span class="detail-value final-value">{{ product.simulatedResult.valorFinal | currency:'BRL':'symbol':'1.2-2' }}</span>
+                            </p>
+                        </div>
+                        <div class="details-description">
+                            {{ product.simulatedResult.detalhes }}
+                        </div>
                     </div>
-                    <div class="details-description">
-                        {{ product.simulatedResult.detalhes }}
+
+                    <div class="simulation-chart-panel">
+                        <h3 class="chart-title">Crescimento Mês a Mês ({{ product.simulatedResult.prazoMeses }}m)</h3>
+                        <ngx-charts-area-chart
+                            [view]="chartView"
+                            [customColors]="chartCustomColors"
+                            [results]="product.simulatedResult.chartData"
+                            [xAxis]="true"
+                            [yAxis]="true"
+                            [showXAxisLabel]="true"
+                            [showYAxisLabel]="true"
+                            xAxisLabel="Mês"
+                            [yAxisLabel]="chartYAxisLabel"
+                            [autoScale]="true"
+                            [gradient]="true">
+                        </ngx-charts-area-chart>
                     </div>
                 </div>
 
-            </div> </div>
+            </div> 
+        </div>
     </div>
 
     <ng-template #loadingOrEmpty>
