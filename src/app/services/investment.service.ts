@@ -1,27 +1,23 @@
-// src/app/services/investment.service.ts
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { SimulationRequest, SimulationResponse } from '../models/simulation.model'; 
+import { Observable, map } from 'rxjs';
+import { SimulationRequest, SimulationResponse } from '../models/simulation.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root'
 })
 export class InvestmentService {
-  
-  // CORREÇÃO: Removendo o prefixo '/api/v1' para simplificar a conexão com o Mock Server
-  private readonly API_BASE = 'http://localhost:3000';
-  
-  // A URL agora será: http://localhost:3000/simular-investimento
-  private readonly SIMULATOR_URL = `${this.API_BASE}/simular-investimento`;
+  private readonly API_URL = 'http://localhost:3000/api/v1';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-  /**
-   * Envia requisição de simulação de investimento para o backend.
-   */
-  simulateInvestment(request: SimulationRequest): Observable<SimulationResponse> {
-    return this.http.post<SimulationResponse>(this.SIMULATOR_URL, request);
-  }
+  simulateInvestment(payload: SimulationRequest): Observable<SimulationResponse> {
+    return this.http.post<SimulationResponse>(`${this.API_URL}/simular-investimento`, payload).pipe(
+      map(response => ({
+        rentabilidade: response.rentabilidade,
+        detalhes: response.detalhes,
+        valorFinal: 0 
+      }))
+    );
+  }
 }

@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
-import { LOCALE_ID } from '@angular/core';
+import { LOCALE_ID, importProvidersFrom } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 

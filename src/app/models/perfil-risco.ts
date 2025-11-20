@@ -1,8 +1,6 @@
-// src/app/models/perfil-risco.ts
-
-export interface PerfilRisco {
+export interface RiskProfile {
   clienteId: number;
-  perfil: 'Conservador' | 'Moderado' | 'Arrojado'; // Use tipos literais para perfis conhecidos
+  perfil: 'Conservador' | 'Moderado' | 'Arrojado';
   descricao: string;
   pontuacao: number;
 }

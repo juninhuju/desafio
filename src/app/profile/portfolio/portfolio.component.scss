@@ -1,7 +1,6 @@
 .portfolio-container {
-  max-width: 1200px;
+  max-width: auto;
   margin: 0 auto;
-  padding: 3px;
 
   h2 {
     color: #004c98;
@@ -12,46 +11,51 @@
 
   h3 {
     color: #004c98;
-    margin-top: 40px;
+    margin-top: 0px;
   }
 }
 
-.grafico-wrapper {
+.grafico-wrapper-relative {
   position: relative;
+  display: block; 
+  margin: 0 auto;
+  padding: 0;
+}
+
+.total-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  text-align: center;
+}
+
+.total-value {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.total-label {
+  display: block;
+  font-size: 14px;
+  color: #666;
+}
+
+.grafico-wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
 
-  ngx-charts-advanced-pie-chart {
-    width: 100%;
-
-    max-width: 300px; // ✅ aumente aqui (antes era 300px ou 400px)
-    height: 250px;     // ✅ defina altura maior
-  }
 
   .valor-central {
     position: absolute;
     text-align: center;
-
-    h3 {
-      font-size: 1rem;
-      color: #666;
-      margin: 0;
-    }
-
-    p {
-      font-size: 1.8rem; // ✅ destaque maior
-      font-weight: bold;
-      color: #000;
-      margin: 5px 0 0;
-    }
   }
 }
 
 table {
-  width: auto;               // ✅ define largura proporcional
-  margin: 20px auto;        // ✅ centraliza horizontalmente
+  width: auto;     
+  margin: 20px auto;    
   border-collapse: collapse;
   font-size: 0.9rem;
 
@@ -87,7 +91,6 @@ table {
   text-align: center;
   color: #004c98;
   font-size: 1.4rem;
-  margin: 40px 0 20px;
 }
 
 .empty-state {

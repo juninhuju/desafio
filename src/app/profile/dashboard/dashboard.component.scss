@@ -1,17 +1,89 @@
 .container {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
-.investor-dashboard {
-    display: flex;
-    justify-content: space-around;
 
+/* Layout principal */
+.investor-dashboard {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap; /* permite quebrar linha em telas menores */
+  gap: 20px;       /* espaço entre os blocos */
 }
 
 .profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Simulação ocupa largura total */
+.simulation {
+  margin-top: 20px;
+}
 
+button {
+  background-color: #00a69d;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: 700;
+  cursor: pointer;
+  width: auto;
+  transition: background-color 0.2s, transform 0.1s;
+
+  &:hover:not(:disabled) {
+    background-color: #00877e;
+  }
+  &:active:not(:disabled) {
+    transform: scale(0.99);
+  }
+  &:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+}
+
+@media (max-width: 1024px) {
+  .investor-dashboard {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .investor-dashboard {
+    flex-direction: column; /* empilha os blocos */
+    align-items: center;
+  }
+
+  .portfolio,
+  .profile,
+  .suggested {
+    width: 100%; /* ocupa toda a largura */
+    max-width: 600px; /* limite para não ficar exagerado */
+  }
+
+  .button {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .button button {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio,
+  .profile,
+  .suggested {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .button button {
+    max-width: 100%;
+  }
+}

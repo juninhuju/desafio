@@ -1,28 +1,21 @@
-<div class="profile-card">
+    <div class="risk-profile-card">
+      <h2>Seu Perfil de Investimento</h2>
+      
+      <div *ngIf="perfil; else loading">
+        
+        <p class="profile-name">{{ perfil.perfil }} ({{ perfil.pontuacao }} pts)</p>
+        <p class="description">{{ perfil.descricao }} </p>
+        
+        <hr>
+        <p class="client-info">ID do Cliente: #{{ perfil.clienteId }}</p>
+      </div>
 
-  <div *ngIf="perfil; else loading" [ngClass]="getProfileClass()">
-    
-    <header class="card-header">
-      <h3 class="title">Seu Perfil de Investimento</h3>
-      <span class="score-badge">{{ perfil.pontuacao }} pts</span>
-    </header>
+      <ng-template #loading>
+        <p>Carregando perfil de risco...</p>
+      </ng-template>
 
-    <section class="card-content">
-      <p class="profile-name">{{ perfil.perfil }}</p>
-      <p class="description">{{ perfil.descricao }}</p>
-    </section>
+      <div class="img-profile">
+        <img [src]="imagemPerfilPath" alt="Imagem do perfil">
+      </div>
 
-    <footer class="card-footer">
-      <p class="disclaimer">ID do Cliente: #{{ perfil.clienteId }}</p>
-    </footer>
-
-  </div>
-
-  <ng-template #loading>
-    <div class="loading-state">
-      <div class="spinner"></div>
-      <p>Avaliando seu perfil de risco...</p>
     </div>
-  </ng-template>
-  
-</div>

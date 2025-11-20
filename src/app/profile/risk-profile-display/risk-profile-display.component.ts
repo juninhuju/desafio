@@ -1,12 +1,10 @@
-// src/app/shared/risk-profile-display/risk-profile-display.component.ts
-
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface ProfileDetail {
   title: string;
   description: string;
-  imageSrc: string; // Caminho simulado para a imagem (ex: 'assets/images/conservative.jpg')
+  imageSrc: string; 
 }
 
 @Component({
@@ -18,13 +16,11 @@ interface ProfileDetail {
 })
 export class RiskProfileDisplayComponent {
   
-  // Dados dos três perfis de risco
   profiles: ProfileDetail[] = [
     {
       title: 'Conservador',
       description: 'Prioriza a segurança e a liquidez do patrimônio. Aceita retornos menores em troca de pouca ou nenhuma exposição a riscos de mercado. Foco em renda fixa e proteção.',
       imageSrc: 'conservador.png' 
-      // NOTA: Troque pelos caminhos reais das suas imagens.
     },
     {
       title: 'Moderado',

@@ -1,35 +1,21 @@
-// src/app/services/perfil-risco.service.ts
-
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
-import { PerfilRisco } from '../models/perfil-risco'; // Importe o modelo
+import { HttpClient } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
+import { RiskProfile } from '../models/profile.model'; // use o modelo unificado
 
 @Injectable({
   providedIn: 'root'
 })
 export class PerfilRiscoService {
 
-  // Dados mocados (simulação da resposta da API)
-  private mockData: PerfilRisco = {
-    clienteId: 123,
-    perfil: "Moderado", // A API retorna este perfil
-    descricao: "Perfil equilibrado entre segurança e rentabilidade.",
-    pontuacao: 65
-  };
+  private readonly API_URL = 'http://localhost:3000/api/v1/perfil-risco';
 
-  constructor() { }
+  constructor(private http: HttpClient) {}
 
-  /**
-   * Simula a chamada GET /perfil-risco/{clienteId}
-   * @param clienteId O ID do cliente a ser buscado
-   * @returns Um Observable que emite o PerfilRisco após um pequeno delay
-   */
-  getPerfilRisco(clienteId: number): Observable<PerfilRisco> {
-    // Para simular a latência da rede, adicione um delay
+  getPerfilRisco(clienteId: number): Observable<RiskProfile> {
     console.log(`Buscando perfil de risco para o cliente: ${clienteId}`);
-    return of(this.mockData).pipe(
-      delay(500) // 0.5 segundos de delay para simular a API
+    return this.http.get<RiskProfile[]>(`${this.API_URL}?id=${clienteId}`).pipe(
+      map(data => data[0]) // retorna o primeiro item do array
     );
   }
 }

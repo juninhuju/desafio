@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { RiskProfile } from '../models/profile.model';
-import { InvestmentHistoryItem } from '../models/investment.model';
-import { RecommendedProduct } from '../models/product.model'; // Mantenha este import para o próximo passo
+import { Investimento } from '../models/investment.model';
+import { RecommendedProduct } from '../models/product.model';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -17,43 +17,31 @@ export class ProfileService {
     private authService: AuthService
   ) { }
 
-  private getClientUrlSegment(): string {
+  private getClientId(): number {
     const clientId = this.authService.getClientId();
     if (!clientId) {
       throw new Error('Client ID não encontrado. Usuário não autenticado.');
     }
-    return clientId.toString();
+    return clientId;
   }
 
-  /**
-   * Busca o Perfil de Risco atual do cliente.
-   * Endpoint: GET /perfil-risco/{clienteld} [cite: 47]
-   */
   getRiskProfile(): Observable<RiskProfile> {
-    const clientIdSegment = this.getClientUrlSegment();
-    const endpoint = `${this.API_URL}/perfil-risco/${clientIdSegment}`;
-    // A propriedade getRiskProfile é definida aqui:
-    return this.http.get<RiskProfile>(endpoint);
+    const clientId = this.getClientId();
+    const endpoint = `${this.API_URL}/perfil-risco?id=${clientId}`;
+    return this.http.get<RiskProfile[]>(endpoint).pipe(
+      map(profiles => profiles[0]) // retorna o primeiro item
+    );
   }
 
-  /**
-   * Busca o Histórico de Investimentos do cliente.
-   * Endpoint: GET /investimentos/{clienteld} [cite: 56]
-   */
-  getInvestmentHistory(): Observable<InvestmentHistoryItem[]> {
-    const clientIdSegment = this.getClientUrlSegment();
-    const endpoint = `${this.API_URL}/investimentos/${clientIdSegment}`;
-    // A propriedade getInvestmentHistory é definida aqui:
-    return this.http.get<InvestmentHistoryItem[]>(endpoint);
+  getInvestmentHistory(): Observable<Investimento[]> {
+    const clientId = this.getClientId();
+    const endpoint = `${this.API_URL}/investimentos?clienteId=${clientId}`;
+    return this.http.get<Investimento[]>(endpoint);
   }
-  
-  /**
-   * Busca a lista de produtos de investimento recomendados.
-   * Endpoint: GET /produtos-recomendados/{perfil} [cite: 75]
-   */
+
+  /** GET /api/v1/produtos-recomendados?perfil={perfil} */
   getRecommendedProducts(perfil: string): Observable<RecommendedProduct[]> {
-    const perfilSegment = perfil.toLowerCase(); 
-    const endpoint = `${this.API_URL}/produtos-recomendados/${perfilSegment}`;
-    return this.http.get<RecommendedProduct[]>(endpoint); 
+    const endpoint = `${this.API_URL}/produtos-recomendados?perfil=${perfil}`;
+    return this.http.get<RecommendedProduct[]>(endpoint);
   }
 }

@@ -1,112 +1,92 @@
-<div class="suggestions-container">
-    <h2> Produto sugerido </h2>
-    
-    <div *ngIf="(suggestedProducts$ | async) as products; else loadingOrEmpty">
-        
-        <div class="products-grid">
-            <div 
-                *ngFor="let product of products" 
-                class="product-card-container" 
-                [attr.data-risk]="product.risco"
-            >
-                <div class="product-card">
-                    <header class="card-header">
-                        <span class="product-type">{{ product.tipo }}</span>
-                        <span class="risk-badge">{{ product.risco }}</span>
-                    </header>
-                    
-                    <h3 class="product-name">{{ product.nome }}</h3>
-                    
-                    <div class="product-details">
-                        <p>
-                            <span class="detail-label">Rentabilidade:</span>
-                            <span class="detail-value yield-value">{{ product.rentabilidade | percent: '1.2-2' }}</span>
-                        </p>
-                    </div>
-                    <div class="simulation-inputs">
-                        <div class="input-group">
-                            <label for="valor-input">Valor a Investir (R$)</label>
-                            <input 
-                                id="valor-input" 
-                                type="number" 
-                                [(ngModel)]="valorInput" 
-                                placeholder="Ex: 10000"
-                                min="100"
-                            >
-                        </div>
-                        <div class="input-group">
-                            <label for="prazo-input">Prazo (meses)</label>
-                            <input 
-                                id="prazo-input" 
-                                type="number" 
-                                [(ngModel)]="prazoInput" 
-                                placeholder="Ex: 12"
-                                min="1"
-                            >
-                        </div>
-                    </div>
+<div class="container">
+  <div class="card simulador">
+    <h3>Simulador de Investimento</h3>
 
-                    
-                    <button 
-                        class="simulate-button"
-                        (click)="simulateInvestment(product)"
-                        [disabled]="!valorInput || !prazoInput || valorInput <= 0 || prazoInput <= 0"
-                    >
-                        {{ product.simulatedResult ? 'Limpar Simulação' : 'Simular' }}
-                    </button>
-                </div>
-
-                <div *ngIf="product.simulatedResult" class="simulation-chart-wrapper">
-                    
-                    <div class="simulation-result-card">
-                        <h3>Resultado da Simulação para {{ product.nome }}</h3>
-                        
-                        <div class="result-details">
-                            <p>
-                                <span class="detail-label">Valor Aplicado:</span>
-                                <span class="detail-value">{{ product.simulatedResult.valorInicial | currency:'BRL':'symbol':'1.2-2' }}</span>
-                            </p>
-                            <p>
-                                <span class="detail-label">Prazo:</span>
-                                <span class="detail-value">{{ product.simulatedResult.prazoMeses }} meses</span>
-                            </p>
-                            <hr>
-                            <p>
-                                <span class="detail-label">Taxa Anual Bruta:</span>
-                                <span class="detail-value yield-value">{{ product.simulatedResult.rentabilidade | percent: '1.2-2' }}</span>
-                            </p>
-                            <p class="final-result">
-                                <span class="detail-label">Valor Bruto Final:</span>
-                                <span class="detail-value final-value">{{ product.simulatedResult.valorFinal | currency:'BRL':'symbol':'1.2-2' }}</span>
-                            </p>
-                        </div>
-                        <div class="details-description">
-                            {{ product.simulatedResult.detalhes }}
-                        </div>
-                    </div>
-
-                    <div class="simulation-chart-panel">
-                        <h3 class="chart-title">Crescimento Mês a Mês ({{ product.simulatedResult.prazoMeses }}m)</h3>
-                        <ngx-charts-area-chart
-                            [view]="chartView"
-                            [customColors]="chartCustomColors"
-                            [results]="product.simulatedResult.chartData"
-                            [xAxis]="true"
-                            [yAxis]="true"
-                            [showXAxisLabel]="true"
-                            [showYAxisLabel]="true"
-                            xAxisLabel="Mês"
-                            [yAxisLabel]="chartYAxisLabel"
-                            [autoScale]="true"
-                            [gradient]="true">
-                        </ngx-charts-area-chart>
-                    </div>
-                </div>
-
-            </div> 
-        </div>
+    <div class="inputs">
+      <label>
+        Valor a Investir (R$)
+        <input type="number" [(ngModel)]="simulador.valor" min="100" />
+      </label>
+      <label>
+        Prazo (meses)
+        <input type="number" [(ngModel)]="simulador.prazoMeses" min="1" />
+      </label>
+      <label>
+        Tipo
+        <select [(ngModel)]="simulador.tipo">
+          <option value="CDB">CDB</option>
+        </select>
+      </label>
     </div>
 
-    <ng-template #loadingOrEmpty>
-        </ng-template>
+    <button (click)="simularInvestimento()">Simular</button>
+
+    <div class="result" *ngIf="resultadoSimulador">
+      <p><strong>Valor Final:</strong> {{ formatCurrency(resultadoSimulador.valorFinal) }}</p>
+      <p><strong>Rentabilidade:</strong> {{ resultadoSimulador.rentabilidade * 100 | number:'1.2-2' }}% a.a.</p>
+      <p class="detalhes">{{ resultadoSimulador.detalhes }}</p>
+    </div>
+  </div>
+
+  <h2>Mais Investimentos</h2>
+
+  <div class="grid">
+    <div class="card" *ngFor="let product of products">
+      <h3>{{ product.nome }}</h3>
+      <p><strong>Tipo:</strong> {{ product.tipo }}</p>
+      <p><strong>Rentabilidade:</strong> {{ product.rentabilidade * 100 | number:'1.2-2' }}% a.a.</p>
+      <p><strong>Risco:</strong> {{ product.risco }}</p>
+
+      <div class="inputs">
+        <label>
+          Valor a Investir (R$)
+          <input type="number" [(ngModel)]="product.valorInput" min="100" />
+        </label>
+        <label>
+          Prazo (meses)
+          <input type="number" [(ngModel)]="product.prazoInput" min="1" />
+        </label>
+      </div>
+
+      <div class="risk-alert" *ngIf="product.isMismatched">
+        <p>⚠️ Este produto está fora do seu perfil ({{ userProfile }}).</p>
+        <label>
+          <input type="checkbox" [(ngModel)]="product.confirmedMismatch" />
+          Concordo que, para investir, é necessário responder novamente à Análise de Perfil do Investidor (API).
+        </label>
+      </div>
+
+      <button (click)="simulate(product)"
+        [disabled]="
+          !product.valorInput ||
+          !product.prazoInput ||
+          product.valorInput <= 0 ||
+          product.prazoInput <= 0 ||
+          (product.isMismatched && !product.confirmedMismatch)
+        ">
+        {{ product.simulatedResult ? 'Limpar Simulação' : 'Simular' }}
+      </button>
+
+      <div class="result" *ngIf="product.simulatedResult">
+        <p><strong>Valor Final:</strong> {{ formatCurrency(product.simulatedResult.valorFinal) }}</p>
+        <p><strong>Rentabilidade:</strong> {{ product.simulatedResult.rentabilidade * 100 | number:'1.2-2' }}% a.a.</p>
+        <p class="detalhes">{{ product.simulatedResult.detalhes }}</p>
+
+        <div class="chart">
+          <ngx-charts-area-chart
+            [results]="product.simulatedResult.chartData"
+            [customColors]="chartCustomColors"
+            [xAxis]="true"
+            [yAxis]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            xAxisLabel="Mês"
+            yAxisLabel="Valor (R$)"
+            [autoScale]="true"
+            [gradient]="true">
+          </ngx-charts-area-chart>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

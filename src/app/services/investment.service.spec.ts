@@ -7,12 +7,12 @@ describe('InvestmentService', () => {
   let service: InvestmentService;
   let httpMock: HttpTestingController;
 
-  const API_BASE = 'http://localhost:3000/api/v1';
+  const API_BASE = 'http://localhost:3000';
   const SIMULATOR_URL = `${API_BASE}/simular-investimento`;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [],
+      imports: [], 
       providers: [InvestmentService]
     });
 
@@ -28,9 +28,6 @@ describe('InvestmentService', () => {
     expect(service).toBeTruthy();
   });
 
-  // ------------------------------------------------------------------
-  // TESTE 1: Simulação de CDB
-  // ------------------------------------------------------------------
   it('deve simular CDB corretamente', (done) => {
     const mockRequest: SimulationRequest = { valor: 10000, prazoMeses: 12, tipo: 'CDB' };
     const mockResponse: SimulationResponse = { valorFinal: 11200, rentabilidade: 0.12, detalhes: 'Simulação baseada em CDB com taxa de 12% ao ano.' };
@@ -46,9 +43,6 @@ describe('InvestmentService', () => {
     req.flush(mockResponse);
   });
 
-  // ------------------------------------------------------------------
-  // TESTE 2: Simulação de LCI
-  // ------------------------------------------------------------------
   it('deve simular LCI corretamente', (done) => {
     const mockRequest: SimulationRequest = { valor: 10000, prazoMeses: 12, tipo: 'LCI' };
     const mockResponse: SimulationResponse = { valorFinal: 10900, rentabilidade: 0.09, detalhes: 'Simulação baseada em LCI com taxa líquida de 9% ao ano.' };
@@ -64,9 +58,6 @@ describe('InvestmentService', () => {
     req.flush(mockResponse);
   });
 
-  // ------------------------------------------------------------------
-  // TESTE 3: Simulação de Tesouro Direto
-  // ------------------------------------------------------------------
   it('deve simular Tesouro Direto corretamente', (done) => {
     const mockRequest: SimulationRequest = { valor: 10000, prazoMeses: 12, tipo: 'Tesouro' };
     const mockResponse: SimulationResponse = { valorFinal: 11500, rentabilidade: 0.15, detalhes: 'Simulação baseada em Tesouro Direto com taxa de 15% ao ano.' };
@@ -82,9 +73,6 @@ describe('InvestmentService', () => {
     req.flush(mockResponse);
   });
 
-  // ------------------------------------------------------------------
-  // TESTE 4: Erro na simulação
-  // ------------------------------------------------------------------
   it('deve lidar com erro ao simular investimento', (done) => {
     const mockRequest: SimulationRequest = { valor: 10000, prazoMeses: 12, tipo: 'CDB' };
     const errorMsg = 'Erro interno do servidor';

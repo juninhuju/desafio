@@ -5,5 +5,5 @@ export interface LoginRequest {
 
 export interface LoginResponse {
   token: string;
-  clientId: number; // ✅ Corrigido de clienteld para clientId
+  clientId: number;
 }

@@ -1,16 +1,23 @@
 <div class="portfolio-container">
   <h2>Carteira de Investimentos</h2>
 
-  <div *ngIf="investimentos.length > 0; else semInvestimentos" class="grafico-wrapper">
-
-    <ngx-charts-advanced-pie-chart
-      [view]="view"
+  <div class="grafico-wrapper-relative">
+    <ngx-charts-pie-chart
+      [view]="[450, 300]"
       [scheme]="scheme"
       [results]="chartData"
       [gradient]="gradient"
       [tooltipDisabled]="tooltipDisabled"
-      (select)="onSelect($event)">
-    </ngx-charts-advanced-pie-chart>
+      [doughnut]="true"
+      [legend]="false"
+      [labels]="true"
+      [arcWidth]="0.40" (select)="onSelect($event)">
+    </ngx-charts-pie-chart>
+
+    <div class="total-center">
+      <span class="total-value">{{ totalCarteira | currency:'BRL':'symbol':'1.0-0' }}</span>
+      <span class="total-label">Total</span>
+    </div>
   </div>
 
   <ng-template #semInvestimentos>
